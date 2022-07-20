@@ -2,9 +2,11 @@
 using namespace std;
 // const int N = 0;
 #define int long long
-const int N = 10000005;
+
+const int N = 1000001;
 vector<int>primes;
-bool p[N] = {0};
+bool p[N + 10] = {0};
+
 
 void Prime_seive() {
 	for (int i = 3; i * i < N; i += 2) {
