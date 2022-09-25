@@ -15,12 +15,12 @@ void Solve() {
 			//hain ye sirf ye karne ke liye hain ki answer exists or not
 			if (amount < 0) {
 				amount = 0;
-			} else {
-				amount += a[i];
-				if (amount > d) {
-					cout << "-1" << endl;
-					return;
-				}
+			}
+		} else {
+			amount += a[i];
+			if (amount > d) {
+				cout << "-1" << endl;
+				return;
 			}
 		}
 	}
