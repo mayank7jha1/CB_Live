@@ -1,47 +1,39 @@
 #include<bits/stdc++.h>
 using namespace std;
+// const int N = 0;
 #define int long long
-const int N = 0;
 
-
-
-int Travel_cards() {
+int Travel_Cards() {
 	int n, a, b, k, f;
 	cin >> n >> a >> b >> k >> f;
 
-	map<pair<string, string>, int>m;//C++ this cannot be unordered.
+	map<pair<string, string>, int>m;//JOurney(ek pair hain) and cost
 
 	string prev_dest = "";
-
 	for (int i = 0; i < n; i++) {
-
-		string start_dest, ending_dest;
-		cin >> start_dest >> ending_dest;
+		string start_point, ending_point;
+		cin >> start_point >> ending_point;
 		int price;
 
-		if (prev_dest == start_dest) {
-			//This is a Tranashipment
+		if (prev_dest == start_point) {
+			//THis is a transhipment:
 			price = b;
 		} else {
 			price = a;
 		}
-		prev_dest = ending_dest;
+		prev_dest = ending_point;
 
-		if (start_dest > ending_dest) {
-			swap(start_dest, ending_dest);
-			//Taaki map ke ander i don't have different keys
-			//for the same type of trip and i can calcalute the
-			//entire same type trip cost at one place only.
+		if (start_point > ending_point) {
+			swap(start_point, ending_point);
 		}
 
-		if (m.find({start_dest, ending_dest}) != m.end()) {
-			//Update the cost
-			m[make_pair(start_dest, ending_dest)] += price;
+		if (m.find({start_point, ending_point}) != m.end()) {
+			m[ {start_point, ending_point}] += price;
 		} else {
-			//This key or trip was not in the map hence add it
-			m[make_pair(start_dest, ending_dest)] = price;
+			m[ {start_point, ending_point}] = price;
 		}
 	}
+
 
 	vector<int>v;
 	int total_cost = 0;
@@ -50,28 +42,29 @@ int Travel_cards() {
 		v.push_back(x.second);
 		total_cost += x.second;
 	}
+	//cout << total_cost << endl;
 
 	sort(v.rbegin(), v.rend());
-
-	// sort(v.begin, v.end(), greater<int>());
-
-	for (int i = 0; i < k; i++) {
+	// for (auto x : v) {
+	// 	cout << x << endl;
+	// }
+	// cout << k << endl;
+	for (int i = 0; i < k and i < v.size(); i++) {
 		if (v[i] >= f) {
+			//cout << v[i] << " " << total_cost << " ";
+
 			total_cost = total_cost - v[i] + f;
 		} else {
 			break;
 		}
 	}
-
+	// cout << endl;
+	// cout << total_cost << endl;
 	return total_cost;
-
 }
+
 
 
 int32_t main() {
-	cout << Travel_cards() << endl;
+	cout << Travel_Cards() << endl;
 }
-
-
-
-
